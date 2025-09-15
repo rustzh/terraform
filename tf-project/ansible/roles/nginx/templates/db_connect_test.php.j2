@@ -1,0 +1,12 @@
+<?php
+// MySQL 연결 시도
+$conn = new mysqli({{ hostvars['db01']['ansible_host'] }}, {{ app_user }}, {{ app_password }}, {{ app_db }});
+
+if ($conn->connect_error) {
+    echo "DB 연결 실패: " . $conn->connect_error;
+} else {
+    echo "DB 연결 성공!";
+}
+
+$conn->close();
+?>

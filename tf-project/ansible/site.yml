@@ -1,0 +1,10 @@
+---
+- name: Configure db server
+  hosts: dbservers
+  roles:
+    - mysql
+
+- name: Configure web server
+  hosts: webservers
+  roles:
+    - nginx

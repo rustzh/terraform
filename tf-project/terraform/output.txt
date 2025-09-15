@@ -1,0 +1,4 @@
+db01_priv_ip = "172.20.32.232"
+elb_dns_addr = "cloud-clb-1326785172.ap-northeast-2.elb.amazonaws.com"
+web01_pub_ip = "3.39.229.27"
+web02_pub_ip = "3.35.16.236"

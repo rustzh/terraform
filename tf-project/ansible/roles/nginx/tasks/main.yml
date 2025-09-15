@@ -1,0 +1,20 @@
+- name: Install nginx package
+  dnf:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - nginx
+    
+- name: Deploy index.html
+  template:
+    src: index.html.j2
+    dest: /usr/share/nginx/html/index.html
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Restart and enabled nginx
+  service:
+    name: nginx
+    state: restarted
+    enabled: true

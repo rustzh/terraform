@@ -1,0 +1,4 @@
+mysql_root_password: "admin123"
+app_db: "cccr_db"
+app_user: "cccr"
+app_password: "cccr123"

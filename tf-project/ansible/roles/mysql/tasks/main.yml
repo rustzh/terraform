@@ -1,0 +1,40 @@
+- name: Install mysql package
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - python3-pymysql
+    - mysql-server
+
+- name: Start and enable MySQL
+  service:
+    name: mysql
+    state: started
+    enabled: true
+
+- name: Set mysql root password
+  mysql_user:
+    name: root
+    host: localhost
+    password: "{{ mysql_root_password }}"
+    check_implicit_admin: yes
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    state: present
+  ignore_errors: yes
+
+- name: Create app db
+  mysql_db:
+    name: "{{ app_db }}"
+    state: present
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    
+- name: Allow user to connect from anywhere
+  mysql_user:
+    name: "{{ app_user }}"
+    password: "{{ app_password }}"
+    priv: "{{ app_db }}.*:ALL"
+    host: "%"
+    state: present
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
